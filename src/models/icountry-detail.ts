@@ -10,5 +10,7 @@ export interface ICountryDetail {
   critical: number,
   casesPerOneMillion: number,
   deathsPerOneMillion: number,
-  firstCase: string
+  firstCase: string,
+  totalTests: number,
+  testsPerOneMillion: number
 }

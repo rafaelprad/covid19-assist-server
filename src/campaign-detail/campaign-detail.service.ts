@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { ICampaignDetail } from '../models/icampaign-detail';
-import { BaseService } from 'src/shared/base-service';
+import { BaseService } from '../shared/base-service';
 import { stringify } from 'querystring';
 import { IResponse } from '../models/iresponse';
 

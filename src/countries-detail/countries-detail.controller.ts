@@ -38,7 +38,10 @@ export class CountriesDetailController {
       .children("tr")
       .children("td");
 
-    const totalColumns = 11;
+    // count worldometers table columns
+    const colCount = html('table#main_table_countries_today th').length;
+
+    const totalColumns = colCount;
     const countryColIndex = 0;
     const casesColIndex = 1;
     const todayCasesColIndex = 2;
@@ -49,7 +52,8 @@ export class CountriesDetailController {
     const criticalColIndex = 7;
     const casesPerOneMillionColIndex = 8;
     const deathsPerOneMillionColIndex = 9;
-    const firstCaseColIndex = 10;
+    const totalTestsColIndex = 10;
+    const testsPerOneMillionColIndex = 11;
 
     let resultCountryDetail: ICountryDetail = <ICountryDetail>{};
     for (let i = 0; i < countriesTableCells.length - totalColumns; i += 1) {
@@ -67,7 +71,7 @@ export class CountriesDetailController {
         country = country.trim();
         if (country.length === 0) {
           // parse with hyperlink
-          country = cell.children[0].next.children[0].data || "";
+          country = cell.children[0].next.children[0] && cell.children[0].next.children[0].data || "";
         }
         resultCountryDetail = <ICountryDetail>{};
         resultCountryDetail.country = country.trim() || "";
@@ -145,10 +149,22 @@ export class CountriesDetailController {
           10
         );
       }
-      // get first case date
-      if (i % totalColumns === firstCaseColIndex) {
-        let firstCase = cell.children.length != 0 ? cell.children[0].data : "";
-        resultCountryDetail.firstCase = firstCase;
+
+      // get total tests
+      if (i % totalColumns === totalTestsColIndex) {
+        let totalTests = cell.children.length != 0 ? cell.children[0].data : "";
+        resultCountryDetail.totalTests = parseInt(
+          totalTests.trim().replace(/,/g, "") || "0",
+          10
+        );
+      }
+      // get tests per one million population
+      if (i % totalColumns === testsPerOneMillionColIndex) {
+        let testsPerOneMillion = cell.children.length != 0 ? cell.children[0].data : "";
+        resultCountryDetail.testsPerOneMillion = parseInt(
+          testsPerOneMillion.trim().replace(/,/g, "") || "0",
+          10
+        );
       }
 
     }

@@ -1,4 +1,4 @@
-import { AppConfig } from "src/config/app-config";
+import { AppConfig } from "../config/app-config";
 import { UtilValidator } from "./util-validator";
 import { Constants } from "./constants";
 import * as AWS from "aws-sdk";
